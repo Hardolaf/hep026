@@ -2,7 +2,7 @@
 
 **Project**: hep026
 
-**Author**: Joseph D Warner
+**Author**: Joseph D Warner <<warner.512@osu.edu>>
 
 **Organization**: The Ohio State University
 

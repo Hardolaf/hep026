@@ -1,6 +1,7 @@
 # Hey Emacs, this is a -*- makefile -*-
 #
 # WinAVR makefile written by Eric B. Weddington, Jï¿½rg Wunsch, et al.
+# Modified by Joseph Warner
 # Released to the Public Domain
 # Please read the make user manual!
 #
