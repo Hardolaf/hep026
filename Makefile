@@ -43,13 +43,13 @@
 
 
 # MCU 
-MCU = atmega328
-MCU_AVRDUDE = m328p
+MCU = atmega32u4
+MCU_AVRDUDE = m32u4
 
 # Main Oscillator Frequency
 # This is only used to define F_OSC in all assembler and c-sources.
-F_OSC = 16000000
-F_CPU = 16000000
+F_OSC = 16000000L
+F_CPU = 16000000L
 
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
@@ -186,7 +186,7 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # Type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER = arduino -b115200
+AVRDUDE_PROGRAMMER = arduino -b57600
 #stk500v1 -b115200 -B10 
 #115200
 #avrispmkII
