@@ -10,6 +10,20 @@
 
 **Date**: 2014/07/11
 
+- [Purpose](#user-content-purpose)
+- [Hardware Requirements](#user-content-hardware-requirements)
+    - [Arduino Yun Details](#user-content-arduino-yun-details)
+        - [ATmega32u4](#user-content-atmega32u4)
+        - [Atheros AR9331](#user-content-atheros-ar9331)
+    - [Constants and Signals](#user-content-constants-and-signals)
+        - [Serial](#user-content-serial)
+        - [I2C and ADC control](#user-content-i2c-and-adc-control)
+        - [MUX Selection](#user-content-mux-selection)
+        - [Integrator Control](#user-content-integrator-control)
+        - [External Inputs](#user-content-external-inputs)
+- [Software Requirements](#user-content-software-requirements)
+- [Using This Software](#user-content-using-this-software)
+
 ## Purpose
 
 This software aims to control the BPM Data Acquisition System that is being
