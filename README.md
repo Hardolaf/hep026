@@ -22,7 +22,57 @@ data from beam profile monitors (BPM) located at
 This software is designed to work with the hep026 rev. 1 board designed by
 Joseph Warner of The Ohio State University ATLAS Group. If this software is
 not being used with that board but instead with some equivalent board, certain
-constants may need to be updated in *defines.h*.
+constants may need to be updated in *defines.h*. The microcontroller daughter
+board used in this project is the Arduino Yun which has basic information
+detailed below.
+
+### Arduino Yun Details
+
+The [Arduino Yun](http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN)
+is an open source prototyping board that is designed with two processors:
+ATmega32u4 and the Atheros AR9331.
+
+#### ATmega32u4
+
+The [ATmega32u4](http://www.atmel.com/devices/ATMEGA32U4.aspx) controls all of
+the input and output pins on the Arduino Yun. It provides a
+[pinout digaram](http://arduino.cc/en/Hacking/PinMapping32u4) on Arduino's
+official website showing the mapping between the pins on the mcu and their
+function on the Arduino Yun. A summary of its functionality is provided below
+taken from the official product page of the Arduino Yun.
+
+Microcontroller | ATmega32u4
+--------------- | ----------
+Operating Voltage | 5V
+Input Voltage | 5V
+Digital I/O Pins | 20
+PWM Channels | 7
+Analog Input Channels | 12
+DC Current per I/O Pin | 40 mA
+DC Current for 3.3V Pin | 50 mA
+Flash Memory | 32 KB (of which 4 KB used by bootloader)
+SRAM | 2.5 KB
+EEPROM | 1 KB
+Clock Speed | 16 MHz
+
+#### Atheros AR9331
+
+The [Atheros AR9331](http://www.openhacks.com/uploadsproductos/ar9331_datasheet.pdf)
+provides a linux based operating system for the Arduino Yun. It is connected
+to an ethernet port and WiFi radio that allow communication via the Internet.
+A short summary of its capabilities is provided below from the official
+product page of the Arduino Yun.
+
+Processor | Atheros AR9331
+--------- | --------------
+Architecture | MIPS @400MHz
+Operating Voltage | 3.3V
+Ethernet | IEEE 802.3 10/100Mbit/s
+WiFi | IEEE 802.11b/g/n
+USB Type-A | 2.0 Host
+Card Reader | Micro-SD only
+RAM | 64 MB DDR2
+Flash Memory | 16 MB
 
 ### Constants and Signals
 
