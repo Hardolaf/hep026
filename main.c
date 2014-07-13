@@ -1,12 +1,11 @@
-#define F_CPU 16000000UL
-
+/* Standard library includes */
 #include <avr/io.h>
 #include <util/delay.h>
 
-int main(void){
-	// Set prescaler
-//	TCCRiB |= (1<<CSi2);
+/* Project include */
+#include "defines.h"
 
+int main(void) {
 	// Set pin 13 for output
 	DDRB |= (1<<PB5);
 	while(1){
