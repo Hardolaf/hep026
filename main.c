@@ -1,9 +1,9 @@
+/* Project include */
+#include "defines.h"
+
 /* Standard library includes */
 #include <avr/io.h>
 #include <util/delay.h>
-
-/* Project include */
-#include "defines.h"
 
 int main(void) {
 	// Set pin 13 for output

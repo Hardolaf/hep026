@@ -186,13 +186,14 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # Type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER = arduino -b57600
+AVRDUDE_PROGRAMMER = stk500v2 -b57600 -Pusb
+#arduino -b57600
 #stk500v1 -b115200 -B10 
 #115200
 #avrispmkII
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
-AVRDUDE_PORT = /dev/ttyACM1    # programmer connected to serial device
+AVRDUDE_PORT = /dev/ttyACM0    # programmer connected to serial device
 
 AVRDUDE_WRITE_FLASH = -U flash:w:$(OBJDIR)/$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(OBJDIR)/$(TARGET).eep
@@ -254,7 +255,7 @@ MSG_CLEANING = Cleaning project:
 OBJ = $(SRC:.c=.o) $(ASRC:.S=.o) 
 
 # Define all listing files.
-LST = $(ASRC:.S=.lst) $(SRC:.c=.lst)
+LST = $(ASRC:.S=$(OBJDIR)/.lst) $(SRC:.c=$(OBJDIR)/.lst)
 
 
 # Compiler flags to generate dependency files.
@@ -268,7 +269,7 @@ ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
 # Default target.
-all: $(OBJDIR)/begin gccversion $(OBJDIR)/sizebefore $(OBJDIR)/build $(OBJDIR)/sizeafter $(OBJDIR)/finished $(OBJDIR)/end
+all: $(OBJDIR)/begin gccversion $(OBJDIR)/sizebefore $(OBJDIR)/build $(OBJDIR)/sizeafter finished $(OBJDIR)/end
 
 $(OBJDIR)/build: elf hex eep lss sym
 
@@ -287,7 +288,7 @@ $(OBJDIR)/begin:
 	@echo
 	@echo $(MSG_BEGIN)
 
-$(OBJDIR)/finished:
+finished:
 	@echo $(MSG_ERRORS_NONE)
 
 $(OBJDIR)/end:
@@ -297,12 +298,12 @@ $(OBJDIR)/end:
 
 # Display size of file.
 HEXSIZE = $(SIZE) --target=$(FORMAT) $(TARGET).hex
-ELFSIZE = $(SIZE) -A $(TARGET).elf
+ELFSIZE = $(SIZE) -A $(OBJDIR)/$(TARGET).elf
 $(OBJDIR)/sizebefore:
-	@if [ -f $(TARGET).elf ]; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); echo; fi
+	@if [ -f $(OBJDIR)/$(TARGET).elf ]; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); echo; fi
 
 $(OBJDIR)/sizeafter:
-	@if [ -f $(TARGET).elf ]; then echo; echo $(MSG_SIZE_AFTER); $(ELFSIZE); echo; fi
+	@if [ -f $(OBJDIR)/$(TARGET).elf ]; then echo; echo $(MSG_SIZE_AFTER); $(ELFSIZE); echo; fi
 
 
 
@@ -327,13 +328,13 @@ COFFCONVERT=$(OBJCOPY) --debugging \
 --change-section-address .eeprom-0x810000 
 
 
-coff: $(TARGET).elf
+coff: $(OBJDIR)/$(TARGET).elf
 	@echo
 	@echo $(MSG_COFF) $(TARGET).cof
 	$(COFFCONVERT) -O coff-avr $< $(TARGET).cof
 
 
-extcoff: $(TARGET).elf
+extcoff: $(OBJDIR)/$(TARGET).elf
 	@echo
 	@echo $(MSG_EXTENDED_COFF) $(TARGET).cof
 	$(COFFCONVERT) -O coff-ext-avr $< $(TARGET).cof
@@ -367,7 +368,7 @@ extcoff: $(TARGET).elf
 
 
 # Link: create ELF output file from object files.
-.SECONDARY : $(TARGET).elf
+.SECONDARY : $(OBJDIR)/$(TARGET).elf
 .PRECIOUS : $(OBJ)
 %.elf: $(OBJ)
 	@echo
@@ -401,21 +402,16 @@ clean: begin clean_list finished end
 clean_list :
 	@echo
 	@echo $(MSG_CLEANING)
-	$(REMOVE) $(OBJDIR)/$(TARGET).hex
-	$(REMOVE) $(OBJDIR)/$(TARGET).eep
 	$(REMOVE) $(TARGET).obj
 	$(REMOVE) $(TARGET).cof
-	$(REMOVE) $(OBJDIR)/$(TARGET).elf
-	$(REMOVE) $(OBJDIR)/$(TARGET).map
 	$(REMOVE) $(TARGET).obj
 	$(REMOVE) $(TARGET).a90
-	$(REMOVE) $(OBJDIR)/$(TARGET).sym
 	$(REMOVE) $(TARGET).lnk
-	$(REMOVE) $(OBJDIR)/$(TARGET).lss
 	$(REMOVE) $(OBJ)
-	$(REMOVE) $(LST)
+	$(REMOVE) *.lst
 	$(REMOVE) $(SRC:.c=.s)
 	$(REMOVE) $(SRC:.c=.d)
+	$(REMOVE) $(OBJDIR)/*
 	$(REMOVE) .dep/*
 
 
