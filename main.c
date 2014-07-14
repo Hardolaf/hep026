@@ -7,14 +7,14 @@
 
 int main(void) {
 	// Set pin 13 for output
-	DDRB |= (1<<PB5);
+	DDRC |= (1<<PC7);
 	while(1){
-		if (PORTB & (1<<PB5)) {
-			PORTB &= ~(1<<PB5);
+		if (PORTC & (1<<PC7)) {
+			PORTC &= ~(1<<PC7);
 		} else {
-			PORTB |= (1<<PB5);
+			PORTC |= (1<<PC7);
 		}
-		_delay_ms(200);
+		_delay_ms(500);
 	}
 
 	return 0;

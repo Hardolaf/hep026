@@ -186,7 +186,7 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # Type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER = stk500v2 -b57600 -Pusb
+AVRDUDE_PROGRAMMER = avr109 -b57600
 #arduino -b57600
 #stk500v1 -b115200 -B10 
 #115200
@@ -315,7 +315,9 @@ gccversion :
 
 # Program the device.  
 program: $(OBJDIR)/$(TARGET).hex $(OBJDIR)/$(TARGET).eep
-	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+	scp build/main.hex root@192.168.159.87:/tmp/main.hex
+	ssh root@192.168.159.87 run-avrdude /tmp/main.hex
+#	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
 
 
