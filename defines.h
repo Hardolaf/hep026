@@ -1,3 +1,5 @@
+#ifndef HEP026_DEFINES
+#define HEP026_DEFINES
 
 // CPU Frequency
 #define F_CPU 16000000UL
@@ -28,3 +30,4 @@
 /* External Inputs */
 #define PIN_EXT_TRIGGER PF7 //A0
 #define PIN_EXT_CPS PF6 // A1
+#endif
