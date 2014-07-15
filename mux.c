@@ -42,14 +42,18 @@ void mux_off(void) {
  */
 void mux_cycle(void) {
 	if (mux1_state < 6) { 
-		if (++mux2_state == 8) {
+		if (mux2_state == 7) {
 			mux1_state += 1;
 			mux2_state = 0;
+		} else {
+			mux2_state += 1;
 		}
 		mux_write_state();
 	} else if (mux1_state == 6) {
-		if (++mux2_state == 2) {
+		if (mux2_state == 1) {
 			mux_off();
+		} else {
+			mux2_state += 1;
 		}
 		mux_write_state();
 	}
