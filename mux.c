@@ -1,39 +1,55 @@
 #include "defines.h"
 #include "mux.h"
 
-uint_8 mux1_state = B00000111;
-uint_8 mux2_state = 0;
+#include <avr/io.h>
 
-/*
- * Writes the current state of mux1_state and mux2_state to the muxes.
- */
+uint8_t mux_state = 0b00111000;
+
 void mux_write_state(void) {
-	// Write the state of the first mux in order (A, B, C)
-	if ((mux1_state<<1) != (PORTD<<PIN_MUX1_SEL_A)) {
-		PORTD ^= PIN_MUX1_SEL_A;
-	}
-	if ((mux1_state<<2) != (PORTE<<PIN_MUX1_SEL_B)) {
-		PORTE ^= PIN_MUX1_SEL_B;
-	}
-	if ((mux1_state<<3) != (PORTB<<PIN_MUX1_SEL_C)) {
-		PORTB ^= PIN_MUX1_SEL_C;
+	uint8_t mask = ((mux_state<<1)<<PIN_MUX1_SEL_A);
+	if (!(PORTD & mask)) {
+		PORTD ^= mask;
 	}
 
-	// Write the state of the second mux in order (A, B, C)
-	if ((mux2_state<<1) != (PORTB<<PIN_MUX2_SEL_A)) {
-		PORTB ^= PIN_MUX2_SEL_A;
+	mask = ((mux_state<<2)<<PIN_MUX1_SEL_B);
+	if (!(PORTE & mask)) {
+		PORTE ^= mask;
 	}
-	if ((mux2_state<<2) != (PORTB<<PIN_MUX2_SEL_B)) {
-		PORTB ^= PIN_MUX2_SEL_B;
+
+	mask = ((mux_state<<3)<<PIN_MUX1_SEL_C);
+	if (!(PORTB & mask)) {
+		PORTB ^= mask;
 	}
-	if ((mux2_state<<3) != (PORTB<<PIN_MUX2_SEL_C)) {
-		PORTB ^= PIN_MUX2_SEL_C;
+
+	mask = ((mux_state<<4)<<PIN_MUX2_SEL_A);
+	if (!(PORTB & mask)) {
+		PORTB ^= mask;
+	}
+
+	mask = ((mux_state<<5)<<PIN_MUX2_SEL_B);
+	if (!(PORTB & mask)) {
+		PORTB ^= mask;
+	}
+
+	mask = ((mux_state<<6)<<PIN_MUX2_SEL_C);
+	if (!(PORTB & mask)) {
+		PORTB ^= mask;
 	}
 }
 
+/*
+ * Turns the muxes off.
+ */
 void mux_off(void) {
-	mux1_state = B00000111;
-	mux2_state = 0;
+	mux_state = 0b00111000;
+	mux_write_state();
+}
+
+/*
+ * Turns the first mux channel on
+ */
+void mux_on(void) {
+	mux_state = 0;
 	mux_write_state();
 }
 
@@ -41,20 +57,16 @@ void mux_off(void) {
  * Advances to the next valid mux state or off
  */
 void mux_cycle(void) {
-	if (mux1_state < 6) { 
-		if (mux2_state == 7) {
-			mux1_state += 1;
-			mux2_state = 0;
-		} else {
-			mux2_state += 1;
-		}
-		mux_write_state();
-	} else if (mux1_state == 6) {
-		if (mux2_state == 1) {
-			mux_off();
-		} else {
-			mux2_state += 1;
-		}
-		mux_write_state();
+	if (mux_state < 50) {
+		mux_state += 1;
+	} else {
+		mux_off();
 	}
+}
+
+/*
+ * Returns the current state of the mux as an int
+ */
+int mux_get_state(void) {
+	return mux_state;
 }

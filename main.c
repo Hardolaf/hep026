@@ -19,22 +19,22 @@
  *    PORTX |= (1<<PXN);
  *      Where X is the pin set, N is the pin number
  * Setting a pin low:
- *    PORTX |= (1<<PXN);
+ *    PORTX ~= (1<<PXN);
  */
 
 int main(void) {
-	// Set pin 13 for output
-	DDRC |= (1<<PC7);
+	// Set output pins (does not define I2C)
+	DDRB |= 0b11110000;
+	DDRC |= 0b11000000;
+	DDRD |= 0b11011100;
 
-	PORTC |= (1<<PC7);
-	_delay_ms(5000);
 	while(1){
-		if (PORTC & (1<<PC7)) {
-			PORTC &= ~(1<<PC7);
-		} else {
-			PORTC |= (1<<PC7);
+		mux_on();
+		_delay_ms(100);
+		for (uint8_t i; i < 50; i++) {
+			mux_cycle();
+			_delay_ms(100);
 		}
-		_delay_ms(500);
 	}
 
 	return 0;

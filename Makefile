@@ -62,7 +62,7 @@ OBJDIR = build
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(TARGET).c
-#SRC += $(TARGET).c
+SRC += mux.c
 
 # List Assembler source files here.
 # Make them always end in a capital .S.  Files ending in a lowercase .s
@@ -315,8 +315,8 @@ gccversion :
 
 # Program the device.  
 program: $(OBJDIR)/$(TARGET).hex $(OBJDIR)/$(TARGET).eep
-	scp build/main.hex root@192.168.159.87:/tmp/main.hex
-	ssh root@192.168.159.87 run-avrdude /tmp/main.hex
+	scp build/main.hex root@hep026a1.local:/tmp/main.hex
+	ssh root@hep026a1.local run-avrdude /tmp/main.hex
 #	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
 
