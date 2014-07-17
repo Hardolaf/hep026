@@ -7,6 +7,7 @@
 
 /* Project libraries */
 #include "mux.h"
+#include "adc.h"
 
 /****************************************************************************
  *                               Notes                                      *
@@ -27,6 +28,8 @@ int main(void) {
 	DDRB |= 0b11110000;
 	DDRC |= 0b11000000;
 	DDRD |= 0b11011100;
+
+	adc_init();
 
 	while(1){
 		mux_on();

@@ -23,6 +23,8 @@
         - [External Inputs](#user-content-external-inputs)
 - [Software Requirements](#user-content-software-requirements)
 - [Using This Software](#user-content-using-this-software)
+- [Included Libraries](#user-content-included-libraries)
+    - [i2cmaster](#user-content-i2cmaster)
 
 ## Purpose
 
@@ -197,3 +199,14 @@ To then subsequentely load the compiled program onto the microcontroller run
 To clean the build directory of the project run
 
     make clean
+
+## Included Libraries
+
+All files listed under the *lib* directory are provided by other individuals.
+The names of each library and their licenses are listed below.
+
+### i2cmaster
+
+**Author**: Peter Fleury <<pfleury@gmx.ch>>  http://jump.to/fleury
+**License**: GNU GPL
+**Source**: http://homepage.hispeed.ch/peterfleury/avr-software.html
