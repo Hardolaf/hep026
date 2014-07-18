@@ -68,12 +68,25 @@
  * Initializes the ADC to prepare for it to be ready to use
  */
 void adc_init(void) {
-	i2c_init();
+	I2C_init();
 
-	i2c_start_wait(ADC_ADDR+I2C_WRITE);
-	i2c_write(ADC_CONFIG_REGISTER);
-	i2c_write(ADC_CONFIG_MSB);
-	i2c_write(ADC_CONFIG_LSB);
+	I2C_start(ADC_ADDR+I2C_WRITE);
+	I2C_write(ADC_CONFIG_REGISTER);
+	I2C_write(ADC_CONFIG_MSB);
+	I2C_write(ADC_CONFIG_LSB);
 
-	i2c_stop();
+	I2C_stop();
 }
+
+int16_t adc_read(void) {
+
+	I2C_start(ADC_ADDR+I2C_READ);
+
+	int16_t data = ((int8_t)I2C_read_ack())<<8;
+	data |= I2C_read_ack();
+
+	I2C_stop();
+
+	return data;
+}
+
