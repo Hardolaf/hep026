@@ -1,6 +1,6 @@
 #include "defines.h"
 
-#include "lib/i2cmaster/i2cmaster.h"
+#include "lib/I2C-master-lib/I2C_master.h"
 
 /*****************************************************************************
  * ADC Addresses

@@ -63,7 +63,7 @@ OBJDIR = build
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(TARGET).c
 SRC += mux.c
-SRC += lib/i2cmaster/i2cmaster.c
+SRC += lib/I2C-master-lib/I2C_master.c
 SRC += adc.c
 
 # List Assembler source files here.

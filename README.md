@@ -24,7 +24,7 @@
 - [Software Requirements](#user-content-software-requirements)
 - [Using This Software](#user-content-using-this-software)
 - [Included Libraries](#user-content-included-libraries)
-    - [i2cmaster](#user-content-i2cmaster)
+    - [I2C-master-lib](#user-content-i2c-master-lib)
 
 ## Purpose
 
@@ -205,8 +205,9 @@ To clean the build directory of the project run
 All files listed under the *lib* directory are provided by other individuals.
 The names of each library and their licenses are listed below.
 
-### i2cmaster
+### I2C-master-lib
 
-**Author**: Peter Fleury <<pfleury@gmx.ch>>  http://jump.to/fleury
-**License**: GNU GPL
-**Source**: http://homepage.hispeed.ch/peterfleury/avr-software.html
+**Author**: Elia <<elia@eliaselectronics.com>> http://eliaselectronics.com
+
+**Source**: https://github.com/devthrash/I2C-master-lib 
+

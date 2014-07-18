@@ -1,0 +1,3 @@
+[submodule "lib/I2C-master-lib"]
+	path = lib/I2C-master-lib
+	url = git@github.com:Hardolaf/I2C-master-lib.git
