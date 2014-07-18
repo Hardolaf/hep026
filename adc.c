@@ -1,5 +1,7 @@
 #include "defines.h"
 
+#include <stdint.h>
+
 #include "lib/I2C-master-lib/I2C_master.h"
 
 /*****************************************************************************
