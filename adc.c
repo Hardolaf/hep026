@@ -84,11 +84,12 @@ int16_t adc_read(void) {
 
 	I2C_start(ADC_ADDR+I2C_READ);
 
-	int16_t data = ((int8_t)I2C_read_ack())<<8;
-	data |= I2C_read_ack();
+	int16_t adc_data;
+	adc_data = ((int8_t)I2C_read_ack())<<8;
+	adc_data |= I2C_read_ack();
 
 	I2C_stop();
 
-	return data;
+	return adc_data;
 }
 

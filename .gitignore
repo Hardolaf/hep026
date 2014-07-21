@@ -30,3 +30,6 @@ build
 
 # Other files
 *.lst
+
+# Vim files
+*.swp
